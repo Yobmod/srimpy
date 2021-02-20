@@ -1,0 +1,82 @@
+[tool.poetry]
+name = "dmlmung"
+version = "0.1.0"
+description = ""
+authors = ["yobmod <yobmod@gmail.com>"]
+
+[tool.poetry.dependencies]
+# basics
+python = "^3.7"
+typing-extensions = "*"
+python-dotenv = "*"
+
+
+# general
+more-itertools = "*"
+# toolz = "*"  # cytoolz
+# pydantic = "*"
+attrs = "*"
+# toml = "*"
+# ordered-set = "*"
+# bidict = "*"
+# pyfields = "*"
+# typeguard = "*"
+# autoclass = "*"
+# cattrs = "*"
+# attrs-serde = "*"
+
+# if data
+# pandas = "*"
+numpy = {git = "https://github.com/numpy/numpy.git", branch="master"}
+matplotlib = "*"  # bring numpy, pillow
+# seaborn = "*"
+# pandas-alive = "*"
+# xarray = "*"
+# numba = {extras = ["all"], version = "*"}
+
+# if images
+# pillow ="*"
+# python-opencv = "*"
+# imutils = "*"
+
+# if web
+# fastapi = {extras = ["all"], version = "^0.61.1"} # bring uvicorn, aiofiles, pydantic, startlette
+# jinja2 = "^2.11.2"
+# sqlalchemy = "^1.3.19"
+# alembic = "^1.4.2"
+# sqlalchemy-stubs = "^0.3"
+
+
+myfitnesspal = "*"
+
+
+
+
+[tool.poetry.dev-dependencies]
+# cython = "*"  # {git = "https://github.com/cython/cython.git", branch="master"}
+pytest = "*"
+mypy = "*"
+pytest-cov = "*"
+pytest-mypy = "*"
+pytest-sugar = "*"
+pytest-xdist = "*"
+pytest-pythonpath = "*"
+pylama = "*"
+autopep8 = "*"
+flake8 = "*"
+flake8-comprehensions = "*"
+flake8-bugbear = "*"
+flake8-annotations-complexity = "*"
+pdbpp = "*"
+gitpython = "*"
+# pyinstaller = "*"
+GitPython = "*"
+rich = "*"
+pretty-errors = "*"
+
+
+
+[build-system]
+requires = ["poetry>=1.1.4"]
+build-backend = "poetry.masonry.api"
+
