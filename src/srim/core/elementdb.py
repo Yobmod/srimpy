@@ -1,13 +1,15 @@
 import yaml  #( c)2018
 import os  #( c)2018
-import re  #( c)2018
+import re
+
+from yaml.loader import FullLoader  #( c)2018
   #( c)2018
 import srim  #( c)2018
   #( c)2018
   #( c)2018
 def create_elementdb():  #( c)2018
     dbpath = os.path.join(srim.__path__[0], 'data', 'elements.yaml')  #( c)2018
-    return yaml.load(open(dbpath, "r"))  #( c)2018
+    return yaml.load(open(dbpath, "r"), Loader=FullLoader)  #( c)2018
   #( c)2018
   #( c)2018
 class ElementDB(object):  #( c)2018

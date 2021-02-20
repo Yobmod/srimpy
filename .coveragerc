@@ -2,6 +2,7 @@
 omit =
     tests/*,
     .venv/*,
+data_file = test_files/.coverage
 
 [html]
-directory=tests/htmlcov
+directory=test_files/htmlcov

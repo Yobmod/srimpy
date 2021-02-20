@@ -37,6 +37,6 @@ setup(
         'srim': ['data/*.yaml'],  #( c)2018
     },
     setup_requires=['pytest-runner', 'setuptools>=40.0.0'],  
-    install_requires=['pyyaml', 'numpy>=1.11.0' 'matplotlib>=3.0.0'],
+    install_requires=['pyyaml', 'numpy>=1.10.0' 'matplotlib>=3.0.0'],
     tests_require=['pytest', 'pytest-mock', 'pytest-cov' 'pytest-srcpaths'],
 )
