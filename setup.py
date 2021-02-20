@@ -3,18 +3,17 @@ from os import path
 # from codecs import open
 from pathlib import Path
 
-# root = path.abspath(path.dirname(__file__)) 
-root = Path(__file__).parent.absolute()
+import pathlib
+from setuptools import setup
 
-# Get description from the README file
-with open(root / 'README.md', encoding='utf-8') as f:
-    ld = f.read()
+HERE = pathlib.Path(__file__).parent
+README = (HERE / "README.md").read_text()
 
 setup(
     name='srimpy', 
     version='0.6.0',  
     description='Wrapper scripts for Srim analysis and multi-processing',
-    long_description=ld, 
+    long_description=README, 
     long_description_content_type="text/markdown", 
     url='https://gitlab.com/yobmod/srimpy',
     author='Dominic Laventine', 
@@ -23,7 +22,8 @@ setup(
     classifiers=[ 
         'Development Status :: 4 - Beta',
         'Natural Language :: English', 
-        'License :: OSI Approved :: MIT License',  
+        'License :: OSI Approved :: MIT License',
+        "Programming Language :: Python :: 3", 
         'Programming Language :: Python :: 3.6',  
         'Programming Language :: Python :: 3.7', 
         'Programming Language :: Python :: 3.8',  
@@ -36,7 +36,8 @@ setup(
     package_data={
         'srim': ['data/*.yaml'],  #( c)2018
     },
+    include_package_data=True,
     setup_requires=['pytest-runner', 'setuptools>=40.0.0'],  
     install_requires=['pyyaml', 'numpy>=1.10.0' 'matplotlib>=3.0.0'],
-    tests_require=['pytest', 'pytest-mock', 'pytest-cov' 'pytest-srcpaths'],
+    tests_require=['pytest', 'pytest-mock', 'pytest-cov'],
 )
