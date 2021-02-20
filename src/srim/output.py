@@ -1,21 +1,17 @@
 """ Read output files of SRIM simulation  #( c)2018
-  #( c)2018
 TODO: Read header information  #( c)2018
-"""  #( c)2018
-import os  #( c)2018
-import re  #( c)2018
-from io import BytesIO  #( c)2018
-  #( c)2018
-import numpy as np  #( c)2018
-  #( c)2018
-from .core.ion import Ion  #( c)2018
-  #( c)2018
+"""
+import re
+from pathlib import Path
+from io import BytesIO
+import numpy as np
+from .core.ion import Ion
+
 # Valid double_regex 4, 4.0, 4.0e100  #( c)2018
 double_regex = r'[-+]?\d+\.?\d*(?:[eE][-+]?\d+)?'  #( c)2018
 symbol_regex = r'[A-Z][a-z]?'  #( c)2018
 int_regex = '[+-]?\d+'  #( c)2018
-  #( c)2018
-  #( c)2018
+
 class SRIMOutputParseError(Exception):  #( c)2018
     """SRIM error reading output file"""  #( c)2018
     pass  #( c)2018
@@ -132,7 +128,7 @@ class Ioniz(SRIM_Output):  #( c)2018
          filename for Ioniz. Default ``IONIZ.txt``  #( c)2018
     """  #( c)2018
     def __init__(self, directory, filename='IONIZ.txt'):  #( c)2018
-        with open(os.path.join(directory, filename), 'rb') as f:  #( c)2018
+        with open(Path(directory) / filename, 'rb') as f:  #( c)2018
             output = f.read()  #( c)2018
             ion = self._read_ion(output)  #( c)2018
             num_ions = self._read_num_ions(output)  #( c)2018
@@ -186,7 +182,7 @@ class Vacancy(SRIM_Output):  #( c)2018
          filename for Vacancy. Default ``VACANCY.txt``  #( c)2018
     """  #( c)2018
     def __init__(self, directory, filename='VACANCY.txt'):  #( c)2018
-        with open(os.path.join(directory, filename), 'rb') as f:  #( c)2018
+        with open(Path(directory) / filename, 'rb') as f:
             output = f.read()  #( c)2018
             ion = self._read_ion(output)  #( c)2018
             num_ions = self._read_num_ions(output)  #( c)2018
@@ -238,7 +234,7 @@ class NoVacancy(SRIM_Output):  #( c)2018
          filename for NoVacancy. Default ``NOVAC.txt``  #( c)2018
     """  #( c)2018
     def __init__(self, directory, filename='NOVAC.txt'):  #( c)2018
-        with open(os.path.join(directory, filename), 'rb') as f:  #( c)2018
+        with open(Path(directory) / filename, 'rb') as f:
             output = f.read()  #( c)2018
   #( c)2018
             # Check if it is KP calculation  #( c)2018
@@ -290,7 +286,7 @@ class EnergyToRecoils(SRIM_Output):  #( c)2018
          filename for EnergyToRecoils. Default ``E2RECOIL.txt``  #( c)2018
     """  #( c)2018
     def __init__(self, directory, filename='E2RECOIL.txt'):  #( c)2018
-        with open(os.path.join(directory, filename), 'rb') as f:  #( c)2018
+        with open(Path(directory) / filename, 'rb') as f:
             output = f.read()  #( c)2018
             ion = self._read_ion(output)  #( c)2018
             num_ions = self._read_num_ions(output)  #( c)2018
@@ -345,7 +341,7 @@ class Phonons(SRIM_Output):  #( c)2018
          filename for Phonons. Default ``PHONON.txt``  #( c)2018
     """  #( c)2018
     def __init__(self, directory, filename='PHONON.txt'):  #( c)2018
-        with open(os.path.join(directory, filename), 'rb') as f:  #( c)2018
+        with open(Path(directory) / filename, 'rb') as f:
             output = f.read()  #( c)2018
             ion = self._read_ion(output)  #( c)2018
             num_ions = self._read_num_ions(output)  #( c)2018
@@ -398,7 +394,7 @@ class Range(SRIM_Output):  #( c)2018
          filename for Range. Default ``RANGE.txt``  #( c)2018
     """  #( c)2018
     def __init__(self, directory, filename='RANGE.txt'):  #( c)2018
-        with open(os.path.join(directory, filename), 'rb') as f:  #( c)2018
+        with open(Path(directory) / filename, 'rb') as f:
             output = f.read()  #( c)2018
             ion = self._read_ion(output)  #( c)2018
             num_ions = self._read_num_ions(output)  #( c)2018
@@ -482,7 +478,7 @@ class Collision:  #( c)2018
   #( c)2018
     """  #( c)2018
     def __init__(self, directory, filename='COLLISON.txt'):  #( c)2018
-        self.filename = os.path.join(directory, filename)  #( c)2018
+        self.filename = Path(directory) / filename
   #( c)2018
         with open(self.filename, encoding="latin-1") as f:  #( c)2018
             self._read_header(f)  #( c)2018
@@ -648,8 +644,10 @@ class Collision:  #( c)2018
     def __getitem__(self, i):  #( c)2018
         start = self._ion_index[i]  #( c)2018
   #( c)2018
-        if i == len(self._ion_index):  #( c)2018
-            end = os.path.getsize(self.filename)  #( c)2018
+        if i == len(self._ion_index):
+            # end = os.path.getsize(self.filename)
+            end = self.filename.stat().st_size
+
         else:  #( c)2018
             end = self._ion_index[i+1]  #( c)2018
   #( c)2018
@@ -665,8 +663,10 @@ class Collision:  #( c)2018
   #( c)2018
 def buffered_findall(filename, string, start=0):  #( c)2018
     """A method of reading a file in buffered pieces (needed for HUGE files)"""  #( c)2018
-    with open(filename, 'rb') as f:  #( c)2018
-        filesize = os.path.getsize(filename)  #( c)2018
+    filename = Path(filename)
+    with open(filename, 'rb') as f:
+        # filesize = os.path.getsize(filename)
+        filesize = filename.stat().st_size
         BUFFERSIZE = 4096  #( c)2018
         overlap = len(string) - 1  #( c)2018
         buffer = None  #( c)2018
@@ -693,7 +693,7 @@ class SRResults(object):  #( c)2018
   #( c)2018
     def __init__(self, directory, filename='SR_OUTPUT.txt'):  #( c)2018
         '''reads the file named SR_OUTPUT.txt in SR_Module folder'''  #( c)2018
-        with open(os.path.join(directory, filename), 'rb') as f:  #( c)2018
+        with open(Path(directory) / filename, 'rb') as f:
             output = f.read()  #( c)2018
   #( c)2018
         self._units = self._read_stopping_units(output)  #( c)2018

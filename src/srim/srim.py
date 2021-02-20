@@ -1,7 +1,8 @@
 """ Module for automating srim calculations  #( c)2018
   #( c)2018
 """  #( c)2018
-import os  #( c)2018
+import os  #( c)
+from pathlib import Path
 import random  #( c)2018
 import subprocess  #( c)2018
 import shutil  #( c)2018
@@ -180,20 +181,19 @@ class TRIM(object):  #( c)2018
             'TDATA.txt'  #( c)2018
         }  #( c)2018
   #( c)2018
-        if not os.path.isdir(src_directory):  #( c)2018
+        src_directory = Path(src_directory)
+        dest_directory = Path(dest_directory)
+        if not src_directory.is_dir():  #( c)2018
             raise ValueError('src_directory must be directory')  #( c)2018
   #( c)2018
-        if not os.path.isdir(dest_directory):  #( c)2018
+        if not dest_directory.is_dir():  #( c)2018
             raise ValueError('dest_directory must be directory')  #( c)2018
   #( c)2018
-        for known_file in known_files:  #( c)2018
-            if os.path.isfile(os.path.join(  #( c)2018
-                    src_directory, known_file)):  #( c)2018
-                shutil.copy(os.path.join(  #( c)2018
-                    src_directory, known_file), dest_directory)  #( c)2018
-            elif os.path.isfile(os.path.join(src_directory, 'SRIM Outputs', known_file)) and check_srim_output:  #( c)2018
-                shutil.move(os.path.join(  #( c)2018
-                    src_directory, 'SRIM Outputs', known_file), dest_directory)  #( c)2018
+        for known_file in known_files:
+            if (src_directory / known_file).is_dir():
+                shutil.copy(src_directory / known_file, dest_directory)
+            elif (src_directory / 'SRIM Outputs' / known_file).is_file() and check_srim_output:
+                shutil.move(src_directory / 'SRIM Outputs' / known_file, dest_directory)
   #( c)2018
     def run(self, srim_directory=DEFAULT_SRIM_DIRECTORY):  #( c)2018
         """Run configured srim calculation  #( c)2018

@@ -1,17 +1,13 @@
-import yaml  #( c)2018
-import os  #( c)2018
+import yaml
+from pathlib import Path
 import re
-
-from yaml.loader import FullLoader  #( c)2018
-  #( c)2018
 import srim  #( c)2018
-  #( c)2018
-  #( c)2018
+
 def create_elementdb():  #( c)2018
-    dbpath = os.path.join(srim.__path__[0], 'data', 'elements.yaml')  #( c)2018
-    return yaml.load(open(dbpath, "r"), Loader=FullLoader)  #( c)2018
-  #( c)2018
-  #( c)2018
+    dbpath = Path(__file__).parent.parent / 'data' / 'elements.yaml'
+    return yaml.load(open(dbpath, "r"), Loader=yaml.loader.FullLoader)
+
+
 class ElementDB(object):  #( c)2018
     """Element database at ``srim.data.elements.yaml``"""  #( c)2018
     _db = create_elementdb()  #( c)2018

@@ -1,7 +1,8 @@
 
 # 0.6 release
-Drop python < 3.6
-fix pyyaml warning
+Drop python < 3.6       done
+fix pyyaml warning      done
+use pathlib             done
 
 # 0.7 release
 add multiprocessing and plotting
