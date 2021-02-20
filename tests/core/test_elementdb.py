@@ -23,13 +23,13 @@ def test_lookup_name():  #( c)2018
     element = ElementDB._lookup_name('Aluminium')  #( c)2018
     assert element['symbol'] == 'Al'  #( c)2018
     assert element['name'] == 'Aluminium'  #( c)2018
-  #( c)2018
-  #( c)2018
+
+
 def test_lookup_invalid_name():  #( c)2018
     with pytest.raises(KeyError):  #( c)2018
-        ElementDB._lookup_name('Macium') # My gf's name  #( c)2018
-  #( c)2018
-  #( c)2018
+        ElementDB._lookup_name('Suzium') # My dog's name
+
+
 def test_lookup_atomic_number():  #( c)2018
     element = ElementDB._lookup_atomic_number(100)  #( c)2018
     assert element['symbol'] == 'Fm'  #( c)2018

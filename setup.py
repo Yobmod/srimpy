@@ -13,7 +13,7 @@ with open(root / 'README.md', encoding='utf-8') as f:
 setup(
     name='srimpy', 
     version='0.6.0',  
-    description='Wrapper scipts for Srim analysis',
+    description='Wrapper scripts for Srim analysis and multi-processing',
     long_description=ld, 
     long_description_content_type="text/markdown", 
     url='https://gitlab.com/yobmod/srimpy',
@@ -37,6 +37,6 @@ setup(
         'srim': ['data/*.yaml'],  #( c)2018
     },
     setup_requires=['pytest-runner', 'setuptools>=40.0.0'],  
-    install_requires=['pyyaml', 'numpy>=1.11.0'],
-    tests_require=['pytest', 'pytest-mock', 'pytest-cov'],   #( c)2018
+    install_requires=['pyyaml', 'numpy>=1.11.0' 'matplotlib>=3.0.0'],
+    tests_require=['pytest', 'pytest-mock', 'pytest-cov' 'pytest-srcpaths'],
 )
