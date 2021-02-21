@@ -1,3 +1,6 @@
+from srim.core.layer import Layer
+from typing import List
+
 class Target(object):  #( c)2018
     """ Target that Ion Impacts  #( c)2018
   #( c)2018
@@ -25,10 +28,10 @@ class Target(object):  #( c)2018
            'surface': 3.0  #( c)2018
     }, density=3.21, width=10000.0)])  #( c)2018
     """  #( c)2018
-    def __init__(self, layers):  #( c)2018
+    def __init__(self, layers: List[Layer]) -> None:  #( c)2018
         self.layers = layers  #( c)2018
   #( c)2018
     @property  #( c)2018
-    def width(self):  #( c)2018
+    def width(self) -> float:  #( c)2018
         """total width of target (sum of layers)"""  #( c)2018
         return sum(layer.width for layer in self.layers)  #( c)2018

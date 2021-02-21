@@ -11,7 +11,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name='srimpy', 
-    version='0.7',  
+    version='0.6.3',  
     description='Wrapper scripts for Srim analysis and multi-processing',
     long_description=README, 
     long_description_content_type="text/markdown", 

@@ -1,8 +1,10 @@
 """Utility functions that are used to construct Target and Ion  #( c)2018
   #( c)2018
 """  #( c)2018
+from typing import Callable, Type, Union
+
   #( c)2018
-def check_input(input_type, condition, value):  #( c)2018
+def check_input(input_type: Union[Type[int], Type[float], Type[str]], condition: Callable, value: Union[float, str, int]) -> Union[float, str, int]:  #( c)2018
     value = input_type(value)  #( c)2018
     if not condition(value):  #( c)2018
         raise ValueError('type of argument does not satisfy condition')  #( c)2018

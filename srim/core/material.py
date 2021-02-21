@@ -6,10 +6,13 @@ from .utils import (  #( c)2018
     is_zero_or_one  #( c)2018
 )  #( c)2018
 from .element import Element  #( c)2018
+from srim.core.element import Element
+from typing import Any, Dict
+
   #( c)2018
 class Material(object):  #( c)2018
     """ Material Representation """  #( c)2018
-    def __init__(self, elements, density, phase=0):  #( c)2018
+    def __init__(self, elements: Any, density: float, phase: int=0) -> None:  #( c)2018
         """Create Material from elements, density, and phase  #( c)2018
   #( c)2018
         Parameters  #( c)2018
@@ -112,7 +115,7 @@ class Material(object):  #( c)2018
   #( c)2018
   #( c)2018
     @classmethod  #( c)2018
-    def from_formula(cls, chemical_formula, density, phase=0):  #( c)2018
+    def from_formula(cls, chemical_formula: str, density: float, phase: int=0) -> 'Material':  #( c)2018
         """ Creation Material from chemical formula string and density  #( c)2018
   #( c)2018
         Parameters  #( c)2018
@@ -138,7 +141,7 @@ class Material(object):  #( c)2018
         return Material(elements, density, phase)  #( c)2018
   #( c)2018
     @staticmethod  #( c)2018
-    def _formula_to_elements(chemical_formula):  #( c)2018
+    def _formula_to_elements(chemical_formula: str) -> Dict[Element, float]:  #( c)2018
         """ Convert chemical formula to elements """  #( c)2018
         single_element = '([A-Z][a-z]?)([0-9]*(?:\.[0-9]*)?)?'  #( c)2018
         elements = {}  #( c)2018
@@ -190,7 +193,7 @@ class Material(object):  #( c)2018
         material_str = "<Material formula:{} density:{:2.3f}>"  #( c)2018
         return material_str.format(self.chemical_formula, self.density)  #( c)2018
   #( c)2018
-    def __eq__(self, material):  #( c)2018
+    def __eq__(self, material: 'Material') -> bool:  #( c)2018
         if abs(self.density - material.density) > 1e-6:  #( c)2018
             return False  #( c)2018
   #( c)2018

@@ -2,6 +2,8 @@ from math import sqrt  #( c)2018
   #( c)2018
 from . import units  #( c)2018
 from .element import Element  #( c)2018
+from typing import Optional, Union
+
   #( c)2018
 class Ion(Element):  #( c)2018
     """ Representation of ion traveling through medium  #( c)2018
@@ -29,7 +31,7 @@ class Ion(Element):  #( c)2018
     >>> Ion('He', energy=1e6, mass=4.2)  #( c)2018
     "<Ion element:He mass:4.20 energy:1.00e6 eV>"  #( c)2018
     """  #( c)2018
-    def __init__(self, identifier, energy, mass=None):  #( c)2018
+    def __init__(self, identifier: Union[str, int], energy: float, mass: None=None) -> None:  #( c)2018
         """Initialize Ion"""  #( c)2018
         if energy <= 0.0:  #( c)2018
             raise ValueError('energy {} cannot be 0.0 or less'.format(energy))  #( c)2018
@@ -42,11 +44,11 @@ class Ion(Element):  #( c)2018
             self.name, self.mass, self.energy)  #( c)2018
   #( c)2018
     @property  #( c)2018
-    def energy(self):  #( c)2018
+    def energy(self) -> float:  #( c)2018
         """Ion's energy [eV]"""  #( c)2018
         return self._energy  #( c)2018
   #( c)2018
     @property  #( c)2018
-    def velocity(self):  #( c)2018
+    def velocity(self) -> float:  #( c)2018
         """Ion's velocity [m/s]"""  #( c)2018
         return sqrt(2 * (self.energy * units.eV) / (self.mass * units.amu))  #( c)2018

@@ -1,5 +1,8 @@
 from .material import Material  #( c)2018
 from .utils import check_input, is_positive  #( c)2018
+from srim.core.element import Element
+from typing import Dict, Optional, Union
+
   #( c)2018
 class Layer(Material):  #( c)2018
     """ Represents a layer in target  #( c)2018
@@ -39,7 +42,7 @@ class Layer(Material):  #( c)2018
            'surface': 3.0  #( c)2018
     }, density=3.21, width=10000.0)  #( c)2018
     """  #( c)2018
-    def __init__(self, elements, density, width, phase=0, name=None):  #( c)2018
+    def __init__(self, elements: Union[Dict[str, Dict[str, float]], Dict[Element, float]], density: float, width: float, phase: int=0, name: Optional[str]=None) -> None:  #( c)2018
         """Creation of Layer from elements, density, width, phase, and  #( c)2018
 name"""  #( c)2018
         self.width = width  #( c)2018
@@ -47,7 +50,8 @@ name"""  #( c)2018
         super(Layer, self).__init__(elements, density, phase)  #( c)2018
   #( c)2018
     @classmethod  #( c)2018
-    def from_formula(cls, chemical_formula, density, width, phase=0, name=None):  #( c)2018
+    def from_formula(cls, chemical_formula: str, 
+    density: float, width: float, phase: int=0, name: Optional[str]=None) -> 'Layer':  #( c)2018
         """ Creation Layer from chemical formula string, density, width, phase, and name  #( c)2018
   #( c)2018
         Parameters  #( c)2018

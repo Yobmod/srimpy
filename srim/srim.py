@@ -20,6 +20,10 @@ from .core.utils import (  #( c)2018
 from .output import Results, SRResults  #( c)2018
 from .input import AutoTRIM, TRIMInput, SRInput  #( c)2018
 from .config import DEFAULT_SRIM_DIRECTORY  #( c)2018
+from srim.core.ion import Ion
+from srim.core.layer import Layer
+from srim.core.target import Target
+
   #( c)2018
   #( c)2018
 class TRIMSettings(object):  #( c)2018
@@ -85,7 +89,7 @@ class TRIMSettings(object):  #( c)2018
         This class should never explicitely created. Instead set as  #( c)2018
         kwargs in :class:`srim.srim.TRIM`  #( c)2018
     """  #( c)2018
-    def __init__(self, **kwargs):  #( c)2018
+    def __init__(self, **kwargs) -> None:  #( c)2018
         """Initialize settings for a TRIM running"""  #( c)2018
         self._settings = {  #( c)2018
             'description': check_input(str, is_quoteless, kwargs.get('description', 'pysrim run')),  #( c)2018
@@ -109,7 +113,7 @@ class TRIMSettings(object):  #( c)2018
         if self.plot_xmin > self.plot_xmax:  #( c)2018
             raise ValueError('xmin must be <= xmax')  #( c)2018
   #( c)2018
-    def __getattr__(self, attr):  #( c)2018
+    def __getattr__(self, attr: str) -> float:  #( c)2018
         return self._settings[attr]  #( c)2018
   #( c)2018
   #( c)2018
@@ -147,7 +151,8 @@ class TRIM(object):  #( c)2018
         calculations. TRIM has been known to unexpectedly crash mainly  #( c)2018
         due to memory usage.  #( c)2018
     """  #( c)2018
-    def __init__(self, target, ion, calculation=1, number_ions=1000, **kwargs):  #( c)2018
+    def __init__(self, target: Target, ion: Ion, calculation: int=1, number_ions: int=1000, **kwargs
+    ) -> None:  #( c)2018
         """ Initialize TRIM calcualtion"""  #( c)2018
         self.settings = TRIMSettings(**kwargs)  #( c)2018
         self.calculation = check_input(int, is_one_to_seven, calculation)  #( c)2018
@@ -254,7 +259,7 @@ class SRSettings(object):  #( c)2018
         This class should never explicitely created. Instead set as  #( c)2018
         kwargs in :class:`srim.srim.SR`  #( c)2018
     """  #( c)2018
-    def __init__(self, **args):  #( c)2018
+    def __init__(self, **args) -> None:  #( c)2018
         self._settings = {  #( c)2018
             'energy_min': check_input(float, is_positive, args.get('energy_min', 1.0E3)),  #( c)2018
             'output_type': check_input(int, is_one_to_eight, args.get('output_type', 1)),  #( c)2018
@@ -280,7 +285,7 @@ class SR(object):  #( c)2018
         options. There are a few and none are required. Defaults are  #( c)2018
         appropriate for most cases.  #( c)2018
     """  #( c)2018
-    def __init__(self, layer, ion, **kwargs):  #( c)2018
+    def __init__(self, layer: Layer, ion: Ion, **kwargs) -> None:  #( c)2018
         self.settings = SRSettings(**kwargs)  #( c)2018
         self.layer = layer  #( c)2018
         self.ion = ion  #( c)2018

@@ -47,10 +47,11 @@ flake8 = "*"
 flake8-comprehensions = "*"
 flake8-bugbear = "*"
 flake8-annotations-complexity = "*"
-pdbpp = "*"
 pytest-srcpaths = "^1.0.2"
 # toml-sort = "^0.18.0"
 PyYAML = "^5.4.1"
+MonkeyType = "^20.5.0"
+pytest-monkeytype = "^1.1.0"
 
 
 
