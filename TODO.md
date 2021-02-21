@@ -11,7 +11,7 @@ add readme
 # 0.7 release
 add inital types
 add tests to srim and input
-evaluate "Rich", "pretty-errors" "toml" drop pyyaml?
+switch pyyaml to toml (used by pyest) or json
 add tox
 
 
@@ -21,6 +21,7 @@ add tests
 
 
 # 0.9 release
+evaluate "Rich", "pretty-errors"
 
 # 1.0 release!
 

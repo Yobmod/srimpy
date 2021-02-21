@@ -13,7 +13,7 @@ matplotlib = "*"  # bring numpy, pillow
 pillow = "*"
 rich = "*"
 pretty-errors = "*"
-PyYAML = "^5.4.1"
+
 
 
 # general
@@ -34,6 +34,7 @@ attrs = "*"
 [tool.poetry.dev-dependencies]
 pytest = "*"
 mypy = "*"
+coverage = {version = "*", optional = true, extras = ["toml"]}
 pytest-cov = "*"
 pytest-mypy = "*"
 pytest-sugar = "*"
@@ -48,6 +49,8 @@ flake8-bugbear = "*"
 flake8-annotations-complexity = "*"
 pdbpp = "*"
 pytest-srcpaths = "^1.0.2"
+# toml-sort = "^0.18.0"
+PyYAML = "^5.4.1"
 
 
 

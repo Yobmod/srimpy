@@ -11,7 +11,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name='srimpy', 
-    version='0.6.0',  
+    version='0.7',  
     description='Wrapper scripts for Srim analysis and multi-processing',
     long_description=README, 
     long_description_content_type="text/markdown", 
@@ -32,9 +32,9 @@ setup(
     ],
     keywords='srim analysis ionization parallel processing plotting',
     download_url='https://github.com/Yobmod/srimpy/archive/main.zip',
-    packages=find_packages(exclude=['examples', 'tests', 'test_files', 'docs']),  #( c)2018
+    packages=find_packages(exclude=['examples', 'tests', 'test_files']),
     package_data={
-        'srim': ['data/*.yaml'],  #( c)2018
+        'srim': ['data/*.yaml', 'data/*.toml', 'data/*.json' ],
     },
     include_package_data=True,
     setup_requires=['pytest-runner', 'setuptools>=40.0.0'],  
