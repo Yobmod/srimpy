@@ -141,12 +141,12 @@ class Material(object):  #( c)2018
         return Material(elements, density, phase)  #( c)2018
   #( c)2018
     @staticmethod  #( c)2018
-    def _formula_to_elements(chemical_formula: str) -> Dict[Element, float]:  #( c)2018
+    def _formula_to_elements(chemical_formula: str) -> Dict[Element, float]:
         """ Convert chemical formula to elements """  #( c)2018
-        single_element = '([A-Z][a-z]?)([0-9]*(?:\.[0-9]*)?)?'  #( c)2018
+        single_element = r'([A-Z][a-z]?)([0-9]*(?:\.[0-9]*)?)?'
         elements = {}  #( c)2018
   #( c)2018
-        if re.match('^(?:{})+$'.format(single_element), chemical_formula):  #( c)2018
+        if re.match(r'^(?:{})+$'.format(single_element), chemical_formula):  #( c)2018
             matches = re.findall(single_element, chemical_formula)  #( c)2018
         else:  #( c)2018
             error_str = 'chemical formula string {} does not match regex'  #( c)2018
