@@ -8,8 +8,9 @@ authors = ["yobmod <yobmod@gmail.com>"]
 # basics
 python = "^3.7"
 typing-extensions = "*"
-numpy = {git = "https://github.com/numpy/numpy.git", branch="master"}
+numpy = "*"
 matplotlib = "*"  # bring numpy, pillow
+
 # pillow = "*"
 # rich = "*"
 # pretty-errors = "*"
@@ -22,9 +23,10 @@ matplotlib = "*"  # bring numpy, pillow
 # toolz = "*"  # cytoolz
 # pydantic = "*"
 
-# toml = "*"
+
 # ordered-set = "*"
 # bidict = "*"
+
 # cattrs = "*"
 # attrs-serde = "*"
 
@@ -50,10 +52,11 @@ flake8-comprehensions = "*"
 flake8-bugbear = "*"
 flake8-annotations-complexity = "*"
 pytest-srcpaths = "^1.0.2"
-# toml-sort = "^0.18.0"
+toml = "^0.10.2"        # for dev.py
 PyYAML = "^5.4.1"
 MonkeyType = "^20.5.0"
 pytest-monkeytype = "^1.1.0"
+toml-sort = "^0.19.0"
 
 
 
