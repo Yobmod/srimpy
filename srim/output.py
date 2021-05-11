@@ -773,7 +773,7 @@ class SRResults(object):
 
         density_match = re.search(density_reexp.encode('utf-8'), output)
         if density_match:
-            density = np.array([density_match.group(1), density_match.group(2)], dtype='float')
+            density: floatArray = np.array([density_match.group(1), density_match.group(2)], dtype='float')
         else:
             raise SRIMOutputParseError("unable to extract density from file")
         # find the target composition table
